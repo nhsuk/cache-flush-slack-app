@@ -6,7 +6,7 @@ module.exports = df.orchestrator(function* orchestratorFunctionName(context) {
   const input = context.df.getInput();
   const payload = JSON.parse(qs.unescape(qs.parse(input).payload));
 
-  const responseView = yield context.df.callActivity('SlackAppCacheFlush', payload);
-  yield context.df.callActivity('SlackAppCacheFlushUpdate', { view: responseView, viewId: payload.view.id });
+  const responseView = yield context.df.callActivity('CacheFlushRequest', payload);
+  yield context.df.callActivity('CacheFlushResponseActions', { view: responseView, viewId: payload.view.id });
   // TODO: Send DM with the info
 });
