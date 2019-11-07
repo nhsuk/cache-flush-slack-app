@@ -10,11 +10,12 @@ echo "Going to make request to function app: '$APP_SERVICE_HOST'. "
 
 HTTP_STATUS=$(curl -sS -o /dev/null -w "%{http_code}" -XGET "$APP_SERVICE_HOST")
 
+EXPECTED_STATUS=200
 # This is a basic test to check the function app has been deployed. If the
 # deployment has failed no site exists.
 if [ "$HTTP_STATUS" = "200" ]; then
-  echo "Got status '$HTTP_STATUS'. The app has been deployed."
+  echo "Got status '$HTTP_STATUS'. The app has been deployed successfully."
 else
-  echo "HTTP Status code was not 200. It looks like the app has not been deployed successfully."
+  echo "Got status '$HTTP_STATUS', was expecting '$EXPECTED_STATUS'. The app has not been deployed successfully."
   exit 1
 fi
