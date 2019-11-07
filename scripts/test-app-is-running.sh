@@ -5,26 +5,18 @@ if [ -z "$APP_SERVICE_HOST" ]; then
   exit 1
 fi
 
-APP_SERVICE_URL=$APP_SERVICE_HOST/api/FastPurgeUrls
+APP_SERVICE_URL=$APP_SERVICE_HOST/api/slash-start
 
 # Use the env var set from the previous task with the path to the function app
 echo "Going to make request to function app: '$APP_SERVICE_URL'. "
 
-RESPONSE=func-app-response.json
+HTTP_STATUS=$(curl -sS -o /dev/null -w "%{http_code}" -XPOST "$APP_SERVICE_HOST?code=$FUNCTION_KEY")
 
-curl -sS -o "$RESPONSE" -XPOST "$APP_SERVICE_URL?code=$FUNCTION_KEY" -H "Content-Type: application/json" -d "@./scripts/resources/test-payload.json"
-HTTP_STATUS=$(jq '.httpStatus' $RESPONSE)
-echo "Got status '$HTTP_STATUS' from the response body of the request made to the function app."
-
-# httpStatus (HTTP_STATUS) should be 403. This is the status code returned from
-# Akamai's API. Recieving a 403 means the function app has been deployed and is
-# communicating with Akamai, but the payload contains a URL that is not 'owned'
-# by NHS.UK so the response comes back as unauthorized..
-if [ "$HTTP_STATUS" = "403" ]; then
-  echo "HTTP Status code was 403. The function app has been deployed successfully and is able to communicate with Akamai."
+# This is a basic test to check the function app has been deployed. If the
+# deployment has failed no site exists.
+if [ "$HTTP_STATUS" = "204" ]; then
+  echo "Got status '$HTTP_STATUS'. The app has been deployed successfully."
 else
-  echo "HTTP Status code was not 403. Please confirm the function app has been deployed successfully."
-  echo "The response was:"
-  echo $RESPONSE
+  echo "HTTP Status code was not 200. It looks like the app has not been deployed successfully."
   exit 1
 fi
