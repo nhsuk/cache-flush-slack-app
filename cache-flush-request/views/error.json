@@ -15,7 +15,7 @@
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": "The request to cache flush has not been executed :disappointed:.\nThe details of why are shown below :arrow_down:.\nIf the reason is due to an invalid request please make the necessary amendments and resubmit."
+        "text": "The request to cache flush has not been executed :disappointed:. The details are shown below :arrow_down:.\nIf the reason is due to an invalid request please make the necessary amendments and resubmit."
       }
     },
     {
@@ -23,7 +23,7 @@
       "elements": [
         {
           "type": "mrkdwn",
-          "text": "If the problem persists please contact <@U16N9V10F>."
+          "text": "Should the problem persist please contact <@U16N9V10F>."
         }
       ]
     },

@@ -21,6 +21,30 @@
 
 * Start the Function app - `func start`
 
+## Slack app setup and lifecycle
+
+The Slack app is configured to use `Interactive Components` and `Slash
+Commands`. The lifecycle of the application starts with a user initiating a
+request with a
+[slash command](https://api.slack.com/interactivity/slash-commands). The
+details of the command can vary but the `Request URL` must be set to the
+endpoint `/api/slash-start` (this can be changed easily within both the Slack
+app and the Function app).
+
+When the application receives the slash command request it will respond with a
+[modal](https://api.slack.com/surfaces/modals) view. The lifecycle of the modal
+is handled by the Function app. The `Request URL` must be set to the endpoint
+`/api/orchestrator-client` (this can be changed easily within both the Slack
+app and the Function app).
+
+Submitting the request to flush the URLs from the cache in the modal initiates
+a request to the [cache-flush](https://github.com/nhsuk/cache-flush) app. The
+request is likely to take several seconds (and may take 10-20 seconds depending
+on the state of the APIs i.e. whether they are running hot or cold). When the
+response is received it will be displayed within the modal view (if it is still
+open) and a direct message will be sent to the user.
+
+
 ## Deployments and environments
 
 Deployments to all environments are fully automated and are tested to confirm
