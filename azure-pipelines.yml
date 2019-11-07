@@ -73,7 +73,7 @@ stages:
       appName: '$(REVIEW_APP_NAME_ROOT)$(system.pullRequest.pullRequestNumber)'
       appTest: deployed
       azureSubscription: Development
-      environment: cacheflush-review
+      environment: cacheflush-slackapp-review
       releaseEnvironment: dev
 
 - stage: deployIntegrationEnvironment
@@ -86,7 +86,7 @@ stages:
       appName: 'nhsuk-cache-flush-slack-app-func-int-uks'
       appTest: running
       azureSubscription: www.nhs.uk
-      environment: cacheflush-int
+      environment: cacheflush-slackapp-int
       releaseEnvironment: int
   - job: getNumberForMergedPR
     displayName: Get the number of the merged PR
@@ -124,7 +124,7 @@ stages:
       appName: 'nhsuk-cache-flush-slack-app-func-stag-uks'
       appTest: running
       azureSubscription: www.nhs.uk
-      environment: cacheflush-staging
+      environment: cacheflush-slackapp-staging
       releaseEnvironment: staging
 
 - stage: deployProductionEnvironment
@@ -136,5 +136,5 @@ stages:
       appName: 'nhsuk-cache-flush-slack-app-func-prod-uks'
       appTest: running
       azureSubscription: www.nhs.uk
-      environment: cacheflush-production
+      environment: cacheflush-slackapp-production
       releaseEnvironment: production
