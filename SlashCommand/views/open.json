@@ -1,0 +1,75 @@
+{
+  "type": "modal",
+  "title": {
+    "type": "plain_text",
+    "text": "Cache Flush",
+    "emoji": true
+  },
+  "submit": {
+    "type": "plain_text",
+    "text": "Submit",
+    "emoji": true
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Cancel",
+    "emoji": true
+  },
+  "blocks": [
+    {
+      "type": "input",
+      "block_id": "environment",
+      "element": {
+        "type": "static_select",
+        "action_id": "environment_input",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select the environment to flush URLs from",
+          "emoji": true
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "production",
+              "emoji": true
+            },
+            "value": "production"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "staging",
+              "emoji": true
+            },
+            "value": "staging"
+          }
+        ]
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Environment",
+        "emoji": true
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "urls",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "urls_input",
+        "multiline": true,
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Add each URL to flush on a new line",
+          "emoji": true
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "URLs",
+        "emoji": true
+      }
+    }
+  ]
+}

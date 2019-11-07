@@ -1,0 +1,36 @@
+{
+  "name": "cache-flush-slack-app",
+  "version": "0.1.0",
+  "description": "A Slack app to communicate with https://github.com/nhsuk/cache-flush",
+  "scripts": {
+    "git-hook": "npm run lint && npm run test",
+    "lint": "eslint --ext .js,.json .",
+    "test": "nyc --nycrc-path=.nycrc.json mocha --exit --recursive test",
+    "test-watch": "npm run test -- --watch --reporter min",
+    "test-with-coverage": "nyc --nycrc-path=.nycrc.json --reporter=html --reporter=cobertura mocha --exit --recursive test --reporter mocha-junit-reporter"
+  },
+  "author": "Steve Hunt",
+  "dependencies": {
+    "durable-functions": "^1.3.1",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-nhsuk": "^1.0.0",
+    "husky": "^3.0.8",
+    "mocha": "^6.2.1",
+    "mocha-junit-reporter": "^1.0.0",
+    "nock": "^11.4.0",
+    "nyc": "^14.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run git-hook",
+      "pre-push": "npm run git-hook"
+    }
+  }
+}

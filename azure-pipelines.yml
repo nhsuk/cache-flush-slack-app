@@ -1,0 +1,140 @@
+name: $(BuildId)
+
+trigger:
+  batch: false
+  branches:
+    include:
+    - '*'
+  tags:
+    include:
+    - '*'
+
+pr:
+  autoCancel: true
+  branches:
+    include:
+    - '*'
+
+variables:
+  ARTIFACT_NAME: drop
+  REVIEW_APP_NAME_ROOT: 'nhsuk-cache-flush-slack-app-func-dev-uks-PR-'
+  VAULT_APP_NAME: 'nhsuk.cache-flush-slack-app'
+
+stages:
+- stage: build
+  jobs:
+  - job: RunTests
+    pool:
+      vmImage: 'Ubuntu 16.04'
+    steps:
+    - bash: |
+        if [ -f extensions.csproj ]
+        then
+            dotnet build extensions.csproj --output ./bin
+        fi
+      displayName: 'build function extensions'
+    - script: npm install
+      displayName: 'npm install'
+    - script: npm run lint
+      displayName: 'npm run lint'
+    - script: npm run test-with-coverage
+      displayName: 'npm run test-with-coverage'
+    - script: npm prune --production
+      displayName: 'npm prune --production'
+    - task: PublishCodeCoverageResults@1
+      inputs:
+        codeCoverageTool: Cobertura
+        reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
+        summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      inputs:
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/test-results.xml'
+        testRunner: JUnit
+    - task: ArchiveFiles@2
+      displayName: 'Archive Function App'
+      inputs:
+        archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
+        includeRootFolder: false
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifacts'
+      inputs:
+        artifactName: $(ARTIFACT_NAME)
+        pathtoPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
+
+- stage: deployReviewEnvironment
+  displayName: 'Deploy to Review Environment'
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/pull/'), eq(variables['Build.Reason'], 'PullRequest'))
+  dependsOn: build
+  jobs:
+  - template: ./templates/deployment-job.yml
+    parameters:
+      appName: '$(REVIEW_APP_NAME_ROOT)$(system.pullRequest.pullRequestNumber)'
+      appTest: deployed
+      azureSubscription: Development
+      environment: cacheflush-review
+      releaseEnvironment: dev
+
+- stage: deployIntegrationEnvironment
+  displayName: 'Deploy to Integration Environment'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  dependsOn: build
+  jobs:
+  - template: ./templates/deployment-job.yml
+    parameters:
+      appName: 'nhsuk-cache-flush-slack-app-func-int-uks'
+      appTest: running
+      azureSubscription: www.nhs.uk
+      environment: cacheflush-int
+      releaseEnvironment: int
+  - job: getNumberForMergedPR
+    displayName: Get the number of the merged PR
+    steps:
+    - bash: $(System.DefaultWorkingDirectory)/scripts/get-pr-number.sh "$BUILD_SOURCEVERSIONMESSAGE"
+      displayName: 'Set PR number, if available'
+      name: PR_NUMBER
+  - job: deleteReviewEnvironment
+    condition: gt(dependencies.getNumberForMergedPR.outputs['PR_NUMBER.PR_NUMBER'], 0)
+    dependsOn: getNumberForMergedPR
+    displayName: Delete review environment for merged PR
+    variables:
+      PR_NUMBER: $[dependencies.getNumberForMergedPR.outputs['PR_NUMBER.PR_NUMBER']]
+      RESOURCE_GROUP: nhsuk-utils-rg-dev-uks
+      REVIEW_APP_NAME: $(REVIEW_APP_NAME_ROOT)$(PR_NUMBER)
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Delete review environment func app and app insights for merged PR'
+      inputs:
+        azureSubscription: Development
+        inlineScript: |
+          az extension add --name application-insights
+          az monitor app-insights component delete --resource-group $(RESOURCE_GROUP) --app $(REVIEW_APP_NAME) --debug
+          az functionapp delete --resource-group $(RESOURCE_GROUP) --name $(REVIEW_APP_NAME) --debug
+        scriptLocation: inlineScript
+        scriptType: bash
+
+- stage: deployStagingEnvironment
+  displayName: 'Deploy to Staging Environment'
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+  dependsOn: build
+  jobs:
+  - template: ./templates/deployment-job.yml
+    parameters:
+      appName: 'nhsuk-cache-flush-slack-app-func-stag-uks'
+      appTest: running
+      azureSubscription: www.nhs.uk
+      environment: cacheflush-staging
+      releaseEnvironment: staging
+
+- stage: deployProductionEnvironment
+  displayName: 'Deploy to Production Environment'
+  dependsOn: deployStagingEnvironment
+  jobs:
+  - template: ./templates/deployment-job.yml
+    parameters:
+      appName: 'nhsuk-cache-flush-slack-app-func-prod-uks'
+      appTest: running
+      azureSubscription: www.nhs.uk
+      environment: cacheflush-production
+      releaseEnvironment: production

@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AzureWebJobsStorage": "{AzureWebJobsStorage}",
+    "CACHE_FLUSH_FUNCTION_APP_FULL_URL_WITH_PATH_AND_CODE": "https://domain.for.app/path/to/function?code=function-key-code",
+    "SLACK_BOT_USER_OAUTH_ACCESS_TOKEN": "xoxb-xxxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxx"
+  }
+}
