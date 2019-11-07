@@ -5,6 +5,11 @@
     "text": "Cache Flush",
     "emoji": true
   },
+  "close": {
+    "type": "plain_text",
+    "text": "Close",
+    "emoji": true
+  },
   "blocks": [
     {
       "type": "section",
