@@ -1,3 +1,9 @@
+0.4.0 / 2019-11-08
+===================
+- Rename `orchestrator` function to remove deployed function with capitalised
+  `O` which was breaking when calling `client.startNew(...)` with an unknown
+  function name
+
 0.3.0 / 2019-11-08
 ===================
 - Set env vars in deployed apps
