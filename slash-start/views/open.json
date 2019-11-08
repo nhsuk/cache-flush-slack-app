@@ -2,18 +2,15 @@
   "type": "modal",
   "title": {
     "type": "plain_text",
-    "text": "Cache Flush",
-    "emoji": true
+    "text": "Cache Flush"
   },
   "submit": {
     "type": "plain_text",
-    "text": "Submit",
-    "emoji": true
+    "text": "Submit"
   },
   "close": {
     "type": "plain_text",
-    "text": "Cancel",
-    "emoji": true
+    "text": "Cancel"
   },
   "blocks": [
     {
@@ -24,23 +21,20 @@
         "action_id": "environment_input",
         "placeholder": {
           "type": "plain_text",
-          "text": "Select the environment to flush URLs from",
-          "emoji": true
+          "text": "Select the environment to flush URLs from"
         },
         "options": [
           {
             "text": {
               "type": "plain_text",
-              "text": "production",
-              "emoji": true
+              "text": "production"
             },
             "value": "production"
           },
           {
             "text": {
               "type": "plain_text",
-              "text": "staging",
-              "emoji": true
+              "text": "staging"
             },
             "value": "staging"
           }
@@ -48,8 +42,7 @@
       },
       "label": {
         "type": "plain_text",
-        "text": "Environment",
-        "emoji": true
+        "text": "Environment"
       }
     },
     {
@@ -58,17 +51,20 @@
       "element": {
         "type": "plain_text_input",
         "action_id": "urls_input",
+        "initial_value": "",
         "multiline": true,
         "placeholder": {
           "type": "plain_text",
-          "text": "Add each URL to flush on a new line",
-          "emoji": true
+          "text": "Add each URL to flush on a new line"
         }
+      },
+      "hint": {
+        "type": "plain_text",
+        "text": "Every URL must:\n* be on a new line\n* include the protocol e.g. https:\n* be valid (although it doesn't need to exist)\n* have a second level domain of 'nhs.uk' e.g. 'www.nhs.uk' is valid whereas 'www.nhs.not' is not\n\nAn example valid URL is https://www.nhs.uk/path/to/flush"
       },
       "label": {
         "type": "plain_text",
-        "text": "URLs",
-        "emoji": true
+        "text": "URLs"
       }
     }
   ]

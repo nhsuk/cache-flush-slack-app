@@ -1,10 +1,10 @@
 const df = require('durable-functions');
 const processingView = require('./views/processing.json');
 
-module.exports = async function startOrchestration(context, req) {
+module.exports = async function orchestrationClient(context, req) {
   const client = df.getClient(context);
   const instanceId = await client.startNew('orchestrator', undefined, req.body);
-  context.log(`***********************Orchestration started with ID: ${instanceId}.`);
+  context.log(`Orchestration started with ID: ${instanceId}.`);
 
   return {
     body: {

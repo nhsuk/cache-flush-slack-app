@@ -1,0 +1,13 @@
+{
+  "type": "modal",
+  "title": {
+    "type": "plain_text",
+    "text": "Cache Flush"
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Close"
+  },
+  "blocks": [
+  ]
+}
