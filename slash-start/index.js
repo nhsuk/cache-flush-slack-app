@@ -3,7 +3,7 @@ const rp = require('request-promise-native');
 
 const openView = require('./views/open.json');
 
-module.exports = async function initialView(context, req) {
+module.exports = async function slashStart(context, req) {
   try {
     const res = await rp({
       body: {
