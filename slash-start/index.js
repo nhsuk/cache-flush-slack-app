@@ -4,6 +4,8 @@ const rp = require('request-promise-native');
 const openView = require('./views/open.json');
 
 module.exports = async function slashStart(context, req) {
+  openView.blocks[1].element.initial_value = qs.parse(req.body).text;
+
   try {
     const res = await rp({
       body: {
