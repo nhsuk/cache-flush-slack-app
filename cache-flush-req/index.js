@@ -8,10 +8,9 @@ module.exports = async function cacheFlush(context, input) {
 
   const objects = urlsValue.split('\n');
   const cacheFlushUrl = process.env.CACHE_FLUSH_FUNCTION_APP_FULL_URL_WITH_PATH_AND_CODE;
-  let res;
-  let err;
+
   try {
-    res = await rp({
+    const res = await rp({
       body: {
         environment: envValue,
         objects,
@@ -21,17 +20,14 @@ module.exports = async function cacheFlush(context, input) {
       resolveWithFullResponse: true,
       url: cacheFlushUrl,
     });
-    // TODO: Does this need logging?
-    context.log('*******************cacheFlushRes');
-    context.log(res);
+    return {
+      res,
+    };
   } catch (error) {
-    err = error;
     context.log.error('Error occurred updating cache.');
-    context.log.error(err);
+    context.log.error(error);
+    return {
+      err: error,
+    };
   }
-
-  return {
-    err,
-    res,
-  };
 };
