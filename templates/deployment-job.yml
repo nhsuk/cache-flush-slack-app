@@ -54,7 +54,7 @@ jobs:
           displayName: 'Deploy function app'
           inputs:
             appName: $(APP_NAME)
-            appSettings: '-access_token "$(access_token)" -client_secret "$(client_secret)" -client_token "$(client_token)" -host "$(host)" -WEBSITE_NODE_DEFAULT_VERSION $(WEBSITE_NODE_DEFAULT_VERSION)'
+            appSettings: '-CACHE_FLUSH_FUNCTION_APP_FULL_URL_WITH_PATH_AND_CODE "$(CACHE_FLUSH_FUNCTION_APP_FULL_URL_WITH_PATH_AND_CODE)" -SLACK_BOT_USER_OAUTH_ACCESS_TOKEN "$(SLACK_BOT_USER_OAUTH_ACCESS_TOKEN)" -WEBSITE_NODE_DEFAULT_VERSION $(WEBSITE_NODE_DEFAULT_VERSION)'
             appType: functionApp
             azureSubscription: ${{ parameters.azureSubscription }}
             package: $(ARTIFACT_PATH)/*.zip
