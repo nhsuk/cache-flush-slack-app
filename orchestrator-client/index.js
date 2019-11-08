@@ -4,7 +4,7 @@ const processingView = require('./views/processing.json');
 module.exports = async function startOrchestration(context, req) {
   const client = df.getClient(context);
   const instanceId = await client.startNew('orchestrator', undefined, req.body);
-  context.log(`***********************Orchestration started with ID: ${instanceId}.`);
+  context.log(`Orchestration started with ID: ${instanceId}.`);
 
   return {
     body: {

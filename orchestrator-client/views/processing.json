@@ -2,21 +2,18 @@
   "type": "modal",
   "title": {
     "type": "plain_text",
-    "text": "Cache Flush",
-    "emoji": true
+    "text": "Cache Flush"
   },
   "close": {
     "type": "plain_text",
-    "text": "Close",
-    "emoji": true
+    "text": "Close"
   },
   "blocks": [
     {
       "type": "section",
       "text": {
         "type": "plain_text",
-        "text": "Your request is being processed, it may take a few seconds to complete. The status of the request will be communicated within this view and via a direct message.\nThis view can be closed without affecting the request.",
-        "emoji": true
+        "text": "Your request is being processed, it may take a few seconds to complete. The status of the request will be communicated within this view and via a direct message.\nThis view can be closed without affecting the request."
       }
     }
   ]
