@@ -1,4 +1,4 @@
-0.2.0 / TBC
+0.2.0 / 2019-11-08
 ===================
 - Detail Slack app setup and app lifecycle
 - DM user when cache flush request completes
