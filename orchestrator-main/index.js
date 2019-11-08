@@ -1,7 +1,7 @@
 const df = require('durable-functions');
 const qs = require('querystring');
 
-module.exports = df.orchestrator(function* orchestrator(context) {
+module.exports = df.orchestrator(function* orchestratorMain(context) {
   const input = context.df.getInput();
   const payload = JSON.parse(qs.unescape(qs.parse(input).payload));
   // Useful to see the payload contents
