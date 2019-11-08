@@ -1,3 +1,7 @@
+0.3.0 / 2019-11-08
+===================
+- Set env vars in deployed apps
+
 0.2.0 / 2019-11-08
 ===================
 - Detail Slack app setup and app lifecycle
