@@ -106,10 +106,11 @@ The following environment variables are required for the application to run
 successfully.
 There are no default values and they all must have a value set.
 
-| Variable                                               | Description                                                                                                               |
-| --------                                               | -----------                                                                                                               |
-| `SLACK_BOT_USER_OAUTH_ACCESS_TOKEN`                    | The OAuth Access Token for the app's [Bot User](https://api.slack.com/docs/token-types#bot)                               |
-| `CACHE_FLUSH_FUNCTION_APP_FULL_URL_WITH_PATH_AND_CODE` | The full URL to the cache flush function app including protocol, path to the function and the code query string parameter |
+| Variable                                               | Description                                                                                                                                                                       |
+| --------                                               | -----------                                                                                                                                                                       |
+| `CACHE_FLUSH_FUNCTION_APP_FULL_URL_WITH_PATH_AND_CODE` | The full URL to the cache flush function app including protocol, path to the function and the code query string parameter                                                         |
+| `SLACK_BOT_USER_OAUTH_ACCESS_TOKEN`                    | The OAuth Access Token for the app's [Bot User](https://api.slack.com/docs/token-types#bot)                                                                                       |
+| `SLACK_SIGNING_SECRET`                                 | The [Secret](https://api.slack.com/docs/verifying-requests-from-slack#app_management_updates) used by Slack to sign requests allowing the app to verify the origin of the request |
 
 During deployment of the application additional environment variables are
 retrieved from Vault. They define the details of where the application will be
