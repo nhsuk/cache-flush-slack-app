@@ -1,3 +1,7 @@
+0.5.1 / 2019-11-11
+===================
+- Pass new env vars to app
+
 0.5.0 / 2019-11-11
 ===================
 - Verify request originated from Slack

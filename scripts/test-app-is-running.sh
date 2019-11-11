@@ -12,7 +12,7 @@ echo "Going to make request to function app: '$APP_SERVICE_URL'. "
 
 HTTP_STATUS=$(curl -sS -o /dev/null -w "%{http_code}" -XPOST "$APP_SERVICE_URL?code=$FUNCTION_KEY" -d "")
 
-EXPECTED_STATUS=204
+EXPECTED_STATUS=200
 # This is a basic test to check the function app has been deployed. If the
 # deployment has failed no site exists.
 if [ "$HTTP_STATUS" = "$EXPECTED_STATUS" ]; then
