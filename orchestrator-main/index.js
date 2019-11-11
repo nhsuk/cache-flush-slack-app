@@ -2,6 +2,7 @@ const df = require('durable-functions');
 
 module.exports = df.orchestrator(function* orchestratorMain(context) {
   const payload = context.df.getInput();
+  yield context.df.callActivity('cache-flush-req-logger', payload);
   const { err, res } = yield context.df.callActivity('cache-flush-req', payload);
   const view = yield context.df.callActivity('cache-flush-res-build-modal-view', { err, payload, res });
   const { blocks, text } = yield context.df.callActivity('cache-flush-res-build-msg', { err, payload, res });
