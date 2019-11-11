@@ -1,6 +1,6 @@
 const rp = require('request-promise-native');
 
-module.exports = async function cacheFlush(context, input) {
+module.exports = async function requestCacheFlush(context, input) {
   const {
     environment: { environment_input: { selected_option: { value: envValue } } },
     urls: { urls_input: { value: urlsValue } },
@@ -23,11 +23,11 @@ module.exports = async function cacheFlush(context, input) {
     return {
       res,
     };
-  } catch (error) {
+  } catch (err) {
     context.log.error('Error occurred updating cache.');
-    context.log.error(error);
+    context.log.error(err);
     return {
-      err: error,
+      err,
     };
   }
 };
