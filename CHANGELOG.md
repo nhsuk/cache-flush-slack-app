@@ -1,3 +1,11 @@
+0.5.0 / 2019-11-11
+===================
+- Verify request originated from Slack
+- Verify user is allowed to make request
+- Add some basic tests
+- Log all verified and allowed requests
+- Provide better messaging to client in the event of an error
+
 0.4.0 / 2019-11-08
 ===================
 - Rename `orchestrator` function to remove deployed function with capitalised

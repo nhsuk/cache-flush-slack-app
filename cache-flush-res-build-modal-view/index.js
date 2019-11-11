@@ -1,7 +1,7 @@
 const errorBlocks = require('../lib/errorBlocks');
 const successBlocks = require('../lib/successBlocks');
 
-const modal = require('../views/modal-template.json');
+const modal = require('../views/modal-wrapper.json');
 
 module.exports = async function buildModalView(context, input) {
   const { err, payload, res } = input;

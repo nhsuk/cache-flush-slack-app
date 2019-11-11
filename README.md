@@ -108,6 +108,7 @@ There are no default values and they all must have a value set.
 
 | Variable                                               | Description                                                                                                                                                                       |
 | --------                                               | -----------                                                                                                                                                                       |
+| `AZURE_STORAGE_CONNECTION_STRING`                      | The [Azure storage account connection string](https://docs.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string) where the blob containing `allowed-users.json`<sup>[note 1](#notes)</sup> is contained                                                                          |
 | `CACHE_FLUSH_FUNCTION_APP_FULL_URL_WITH_PATH_AND_CODE` | The full URL to the cache flush function app including protocol, path to the function and the code query string parameter                                                         |
 | `SLACK_BOT_USER_OAUTH_ACCESS_TOKEN`                    | The OAuth Access Token for the app's [Bot User](https://api.slack.com/docs/token-types#bot)                                                                                       |
 | `SLACK_SIGNING_SECRET`                                 | The [Secret](https://api.slack.com/docs/verifying-requests-from-slack#app_management_updates) used by Slack to sign requests allowing the app to verify the origin of the request |
@@ -125,3 +126,17 @@ There are no default values and they all must have a value set.
 | `LOCATION`                     | [The location](https://azure.microsoft.com/en-us/global-infrastructure/locations/) where the function app is deployed to                                   |
 | `RESOURCE_GROUP`               | [The Resource Group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview#resource-groups) the function app belongs to    |
 | `WEBSITE_NODE_DEFAULT_VERSION` | [Version of node used by function app runtime](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_node_default_version) |
+
+#### notes:
+1. `allowed-users.json` is a JSON file containing an array of allowed user
+objects. Each user object consists of a mandatory property - `user_id` (used as
+the key to lookup the requester against) and optional but recommended
+`user_name` and `team_domain` properties. An example of a user object is:
+`{ "team_domain": "slack-team-name", "user_id": "ABC123ABC", "user_name": "name-of-user" }`.
+`team_domain` is the
+[Slack workspace](https://slack.com/intl/en-gb/help/articles/115004071768-What-is-Slack-),
+`user_id` is the
+[member ID](https://api.slack.com/messaging/composing/formatting#mentioning-users)
+and `user_name` is the (user editable and therefore not to be relied upon)
+[full name](https://slack.com/intl/en-gb/help/articles/216360827-Change-your-display-name)
+of the user.

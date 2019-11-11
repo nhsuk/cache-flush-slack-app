@@ -68,7 +68,7 @@ stages:
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/pull/'), eq(variables['Build.Reason'], 'PullRequest'))
   dependsOn: build
   jobs:
-  - template: ./templates/deployment-job.yml
+  - template: ./azure-pipelines-templates/deployment-job.yml
     parameters:
       appName: '$(REVIEW_APP_NAME_ROOT)$(system.pullRequest.pullRequestNumber)'
       appTest: deployed
@@ -81,7 +81,7 @@ stages:
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   dependsOn: build
   jobs:
-  - template: ./templates/deployment-job.yml
+  - template: ./azure-pipelines-templates/deployment-job.yml
     parameters:
       appName: 'nhsuk-cache-flush-slack-app-func-int-uks'
       appTest: running
@@ -119,7 +119,7 @@ stages:
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
   dependsOn: build
   jobs:
-  - template: ./templates/deployment-job.yml
+  - template: ./azure-pipelines-templates/deployment-job.yml
     parameters:
       appName: 'nhsuk-cache-flush-slack-app-func-stag-uks'
       appTest: running
@@ -131,7 +131,7 @@ stages:
   displayName: 'Deploy to Production Environment'
   dependsOn: deployStagingEnvironment
   jobs:
-  - template: ./templates/deployment-job.yml
+  - template: ./azure-pipelines-templates/deployment-job.yml
     parameters:
       appName: 'nhsuk-cache-flush-slack-app-func-prod-uks'
       appTest: running
