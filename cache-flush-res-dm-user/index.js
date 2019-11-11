@@ -1,4 +1,5 @@
 const rp = require('request-promise-native');
+const { jsonContentTypeHeader } = require('../lib/constants');
 
 module.exports = async function dmUser(context, input) {
   const { blocks, channel, text } = input;
@@ -12,7 +13,7 @@ module.exports = async function dmUser(context, input) {
       },
       headers: {
         Authorization: `Bearer ${process.env.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN}`,
-        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Type': jsonContentTypeHeader,
       },
       json: true,
       method: 'POST',

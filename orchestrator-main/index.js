@@ -1,12 +1,7 @@
 const df = require('durable-functions');
-const qs = require('querystring');
 
 module.exports = df.orchestrator(function* orchestratorMain(context) {
-  const input = context.df.getInput();
-  const payload = JSON.parse(qs.unescape(qs.parse(input).payload));
-  // Useful to see the payload contents
-  context.log(payload);
-
+  const payload = context.df.getInput();
   const { err, res } = yield context.df.callActivity('cache-flush-req', payload);
   const view = yield context.df.callActivity('cache-flush-res-build-modal-view', { err, payload, res });
   const { blocks, text } = yield context.df.callActivity('cache-flush-res-build-msg', { err, payload, res });
