@@ -9,7 +9,7 @@ const notAllowedBlocks = require('../lib/notAllowedBlocks');
 const processingBlocks = require('../lib/processingBlocks');
 const unauthorizedBlocks = require('../lib/unauthorizedBlocks');
 
-const modal = require('../views/modal-template.json');
+const modal = require('../views/modal-wrapper.json');
 
 module.exports = async function orchestrationClient(context, req) {
   if (isRequestValid(req)) {
