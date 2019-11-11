@@ -36,28 +36,12 @@ module.exports = async function slashStart(context, req) {
         if (!res.ok) {
           context.log.error('Error processing views.open');
           context.log.error(res);
-          return {
-            body: { text: `There has been an error processing views.open:\n\`${JSON.stringify(res)}\`\nPlease contact the app developer.` },
-            headers: { 'Content-Type': jsonContentTypeHeader },
-            status: 200,
-          };
         }
       } catch (err) {
         context.log.error('Error occurred sending views.open');
         context.log.error(err);
-        return {
-          body: { text: `There has been an error sending views.open:\n\`${JSON.stringify(err)}\`\nPlease contact the app developer.` },
-          headers: { 'Content-Type': jsonContentTypeHeader },
-          status: 200,
-        };
       }
-      return {
-        body: {
-          text: 'Request recieved. The interface will be opened momentarily.',
-        },
-        headers: { 'Content-Type': jsonContentTypeHeader },
-        status: 200,
-      };
+      return null;
     }
     // eslint-disable-next-line camelcase
     context.log.warn(`user_name '${user_name}' with user_id '${user_id}' in team_domain '${team_domain}' with team_id '${team_id}' is not on the allowed users list.`);
