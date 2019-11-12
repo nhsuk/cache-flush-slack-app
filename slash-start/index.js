@@ -18,7 +18,20 @@ module.exports = async function slashStart(context, req) {
 
     openView.blocks[1].element.initial_value = text;
 
-    if (await isUserValid(user_id)) {
+    let userValid;
+    try {
+      userValid = await isUserValid(user_id, context);
+    } catch (err) {
+      context.log.error('Error occurred during user validation');
+      context.log.error(err);
+      return {
+        body: { text: `There has been an error during user validation:\n\`${err}\`\nPlease contact the app developer.` },
+        headers: { 'Content-Type': jsonContentTypeHeader },
+        status: 200,
+      };
+    }
+
+    if (userValid) {
       try {
         const res = await rp({
           body: {

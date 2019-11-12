@@ -128,15 +128,11 @@ There are no default values and they all must have a value set.
 | `WEBSITE_NODE_DEFAULT_VERSION` | [Version of node used by function app runtime](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_node_default_version) |
 
 #### notes:
-1. `allowed-users.json` is a JSON file containing an array of allowed user
-objects. Each user object consists of a mandatory property - `user_id` (used as
-the key to lookup the requester against) and optional but recommended
-`user_name` and `team_domain` properties. An example of a user object is:
-`{ "team_domain": "slack-team-name", "user_id": "ABC123ABC", "user_name": "name-of-user" }`.
-`team_domain` is the
-[Slack workspace](https://slack.com/intl/en-gb/help/articles/115004071768-What-is-Slack-),
-`user_id` is the
-[member ID](https://api.slack.com/messaging/composing/formatting#mentioning-users)
-and `user_name` is the (user editable and therefore not to be relied upon)
-[full name](https://slack.com/intl/en-gb/help/articles/216360827-Change-your-display-name)
-of the user.
+1. `allowed-users.csv` is a CSV file containing a list of allowed users. Each
+   record consists of a `user_id` aka a
+   [`member_id`](https://api.slack.com/messaging/composing/formatting#mentioning-users).
+   The `user_id` must be in the first column for it be to recognised by the
+   application as an entry. The second column should contain the name of the
+   person to make it easy to see which users are included within the file. The
+   name of the user is arbitrary, however, the suggested format is
+   `firstname_lastname` e.g. `steve_hunt`.

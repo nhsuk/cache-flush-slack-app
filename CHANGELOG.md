@@ -1,3 +1,7 @@
+0.6.0 / TBC
+===================
+- Use `csv` format rather than `json` for `allowed-users`
+
 0.5.1 / 2019-11-11
 ===================
 - Pass new env vars to app
