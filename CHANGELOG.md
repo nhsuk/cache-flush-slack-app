@@ -1,6 +1,7 @@
 0.6.0 / TBC
 ===================
 - Use `csv` format rather than `json` for `allowed-users`
+- Update unauthorized message to provide template for request
 
 0.5.1 / 2019-11-11
 ===================
