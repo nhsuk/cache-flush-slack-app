@@ -5,10 +5,10 @@ const processingBlocks = require('../lib/processingBlocks');
 
 const modal = require('../views/modal-wrapper.json');
 
-module.exports = async function mainOrchestrationClient(context, req) {
+module.exports = async function cacheFlushOrchestrationClient(context, req) {
   const client = df.getClient(context);
-  const instanceId = await client.startNew('orchestrator-main', undefined, req);
-  context.log(`Orchestration started with ID: ${instanceId}.`);
+  const instanceId = await client.startNew('cache-flush-orchestrator', undefined, req);
+  context.log(`cache-flush orchestration started with ID: ${instanceId}.`);
 
   modal.blocks = processingBlocks();
 

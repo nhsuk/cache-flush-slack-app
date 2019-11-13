@@ -3,9 +3,7 @@ const qs = require('querystring');
 
 module.exports = df.orchestrator(function* slashStartOrchestrator(context) {
   const req = context.df.getInput();
-  context.log.error(req);
-  const payload = (qs.parse(req.body));
-  context.log.warn(payload);
+  const payload = qs.parse(req.body);
 
   try {
     if (yield !context.df.callActivity('verify-req', req)) {

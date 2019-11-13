@@ -1,7 +1,9 @@
 0.6.0 / TBC
 ===================
-- Use `csv` format rather than `json` for `allowed-users`
+- Use `CSV` format rather than `JSON` for `allowed-users`
 - Update unauthorized message to provide template for request
+- Use orchestrator for slash command API
+- Introduce ADRs for capturing key decisions
 
 0.5.1 / 2019-11-11
 ===================

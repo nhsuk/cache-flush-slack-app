@@ -3,7 +3,7 @@ const qs = require('querystring');
 
 const modal = require('../views/modal-wrapper.json');
 
-module.exports = df.orchestrator(function* orchestratorMain(context) {
+module.exports = df.orchestrator(function* cacheFlushOrchestrator(context) {
   const req = context.df.getInput();
   const payload = JSON.parse(qs.unescape(qs.parse(req.body).payload));
 
