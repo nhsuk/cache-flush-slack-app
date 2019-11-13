@@ -2,7 +2,7 @@
   "bindings": [
     {
       "direction": "in",
-      "name": "user",
+      "name": "input",
       "type": "activityTrigger"
     }
   ]
