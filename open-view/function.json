@@ -1,0 +1,9 @@
+{
+  "bindings": [
+    {
+      "direction": "in",
+      "name": "payload",
+      "type": "activityTrigger"
+    }
+  ]
+}
