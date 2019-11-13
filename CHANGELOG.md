@@ -1,3 +1,7 @@
+0.7.1 / 2019-11-13
+===================
+- App running test checks for an empty response (204) not an OK response (200)
+
 0.7.0 / 2019-11-13
 ===================
 - Open view prior to validation, increasing chance of having a usable
