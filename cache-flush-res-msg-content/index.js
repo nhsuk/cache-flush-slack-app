@@ -1,7 +1,7 @@
 const errorBlocks = require('../lib/errorBlocks');
 const successBlocks = require('../lib/successBlocks');
 
-module.exports = async function buildMsg(context, input) {
+module.exports = async function msgContent(context, input) {
   const { err, payload, res } = input;
 
   return {

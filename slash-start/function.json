@@ -10,9 +10,9 @@
       ]
     },
     {
-      "type": "http",
-      "direction": "out",
-      "name": "$return"
+      "direction": "in",
+      "name": "context",
+      "type": "orchestrationClient"
     }
   ]
 }
