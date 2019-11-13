@@ -12,7 +12,8 @@ module.exports = df.orchestrator(function* cacheFlushOrchestrator(context) {
     view = yield context.df.callActivity('verify-req-failed-view');
     yield context.df.callActivity('update-view', { view, viewId: payload.view.id });
   } else if (yield !context.df.callActivity('verify-user', payload.user.id)) {
-    view = yield context.df.callActivity('verify-user-failed-view', payload);
+    const { user: { id, username: name } } = payload;
+    view = yield context.df.callActivity('verify-user-failed-view', { id, name });
     yield context.df.callActivity('update-view', { view, viewId: payload.view.id });
   } else {
     yield context.df.callActivity('cache-flush-req-logger', payload);
