@@ -2,7 +2,7 @@ const qs = require('querystring');
 const rp = require('request-promise-native');
 
 const isRequestValid = require('../lib/verifyRequest');
-const isUserValid = require('../lib/validateUser');
+const isUserValid = require('../lib/verifyUser');
 const { jsonContentTypeHeader } = require('../lib/constants');
 const notAllowedBlocks = require('../lib/notAllowedBlocks');
 const unauthorizedBlocks = require('../lib/unauthorizedBlocks');
@@ -66,7 +66,7 @@ module.exports = async function slashStart(context, req) {
       }
       return {
         body: {
-          text: 'Request recieved. The interface will be opened momentarily.',
+          text: 'Request recieved. The interface will open shortly.',
         },
         headers: { 'Content-Type': jsonContentTypeHeader },
         status: 200,
