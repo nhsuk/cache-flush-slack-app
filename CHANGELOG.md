@@ -4,6 +4,7 @@
   `trigger_id`
 - Add ADR covering decision and reason for opening initial view asap
 - Provide error messages to the user for ease of debugging
+- Add link to ADRs in the `README`
 
 0.6.0 / 2019-11-13
 ===================

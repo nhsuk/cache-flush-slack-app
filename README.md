@@ -136,3 +136,10 @@ There are no default values and they all must have a value set.
    person to make it easy to see which users are included within the file. The
    name of the user is arbitrary, however, the suggested format is
    `firstname_lastname` e.g. `steve_hunt`.
+
+## Architecture Decision Records
+
+This repo uses
+[Architecture Decision Records](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions)
+to record architectural decisions for this project.
+They are stored in [doc/adr](doc/adr).
