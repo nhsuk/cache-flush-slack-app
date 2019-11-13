@@ -1,7 +1,7 @@
 # A Slack app to communicate with [cache-flush](https://github.com/nhsuk/cache-flush)
 
 [![GitHub Release](https://img.shields.io/github/release/nhsuk/cache-flush-slack-app.svg)](https://github.com/nhsuk/cache-flush-slack-app/releases/latest/)
-[![Build Status](https://dev.azure.com/nhsuk/nhsuk.utilities/_apis/build/status/nhsuk.cache-flush-slack-app?branchName=master)](https://dev.azure.com/nhsuk/nhsuk.utilities/_build/latest?definitionId=333&branchName=master)
+[![Build Status](https://dev.azure.com/nhsuk/nhsuk.utilities/_apis/build/status/nhsuk.cache-flush-slack-app?branchName=master)](https://dev.azure.com/nhsuk/nhsuk.utilities/_build/latest?definitionId=333&branchName=master) [![Greenkeeper badge](https://badges.greenkeeper.io/nhsuk/cache-flush-slack-app.svg)](https://greenkeeper.io/)
 
 > A Slack app built as an Azure (durable) Functions App for communicating with
 > the [cache-flush](https://github.com/nhsuk/cache-flush) function app.
