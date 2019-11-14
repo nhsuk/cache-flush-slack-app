@@ -8,10 +8,13 @@ module.exports = df.orchestrator(function* cacheFlushOrchestrator(context) {
   const payload = JSON.parse(qs.unescape(qs.parse(req.body).payload));
 
   let view;
-  if (yield !context.df.callActivity('verify-req', req)) {
+  const verifiedRequest = yield context.df.callActivity('verify-req', req);
+  const verifiedUser = yield context.df.callActivity('verify-user', payload.user.id);
+
+  if (!verifiedRequest) {
     view = yield context.df.callActivity('verify-req-failed-view');
     yield context.df.callActivity('update-view', { view, viewId: payload.view.id });
-  } else if (yield !context.df.callActivity('verify-user', payload.user.id)) {
+  } else if (!verifiedUser) {
     const { user: { id, username: name } } = payload;
     view = yield context.df.callActivity('verify-user-failed-view', { id, name });
     yield context.df.callActivity('update-view', { view, viewId: payload.view.id });
