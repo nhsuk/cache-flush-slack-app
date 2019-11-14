@@ -9,19 +9,25 @@ module.exports = df.orchestrator(function* slashStartOrchestrator(context) {
     if (res.ok) {
       let view;
       const { view: { id: viewId } } = res;
-      if (yield !context.df.callActivity('verify-req', req)) {
+      const verifiedRequest = yield context.df.callActivity('verify-req', req);
+      const verifiedUser = yield context.df.callActivity('verify-user', reqBody.user_id);
+
+      if (!verifiedRequest) {
         const { blocks, text } = yield context.df.callActivity('verify-req-failed');
         yield context.df.callActivity('send-msg', { blocks, channel: reqBody.user_id, text });
         view = yield context.df.callActivity('verify-req-failed-view');
+        // TODO: Fix - Error occurs if the view has been closed
         yield context.df.callActivity('update-view', { view, viewId });
-      } else if (yield !context.df.callActivity('verify-user', reqBody.user_id)) {
+      } else if (!verifiedUser) {
         const { blocks, text } = yield context.df.callActivity('verify-user-failed', req.body);
         yield context.df.callActivity('send-msg', { blocks, channel: reqBody.user_id, text });
         const { user_id: id, user_name: name } = reqBody;
         view = yield context.df.callActivity('verify-user-failed-view', { id, name });
+        // TODO: Fix - Error occurs if the view has been closed
         yield context.df.callActivity('update-view', { view, viewId });
       } else {
         view = yield context.df.callActivity('verified-req-view', reqBody.text);
+        // TODO: Fix - Error occurs if the view has been closed
         yield context.df.callActivity('update-view', { view, viewId });
       }
     } else {
