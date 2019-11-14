@@ -16,19 +16,17 @@ module.exports = df.orchestrator(function* slashStartOrchestrator(context) {
         const { blocks, text } = yield context.df.callActivity('verify-req-failed');
         yield context.df.callActivity('send-msg', { blocks, channel: reqBody.user_id, text });
         view = yield context.df.callActivity('verify-req-failed-view');
-        // TODO: Fix - Error occurs if the view has been closed
         yield context.df.callActivity('update-view', { view, viewId });
       } else if (!verifiedUser) {
         const { blocks, text } = yield context.df.callActivity('verify-user-failed', req.body);
         yield context.df.callActivity('send-msg', { blocks, channel: reqBody.user_id, text });
         const { user_id: id, user_name: name } = reqBody;
         view = yield context.df.callActivity('verify-user-failed-view', { id, name });
-        // TODO: Fix - Error occurs if the view has been closed
         yield context.df.callActivity('update-view', { view, viewId });
       } else {
         view = yield context.df.callActivity('verified-req-view', reqBody.text);
-        // TODO: Fix - Error occurs if the view has been closed
-        yield context.df.callActivity('update-view', { view, viewId });
+        // TODO: Need to know if this error has happened so a dm can be sent
+        yield context.df.callActivity('update-view', { throwErr: true, view, viewId });
       }
     } else {
       yield context.df.callActivity('send-msg', { channel: reqBody.user_id, text: `There has been an error opening the initial view:\n\`${JSON.stringify(res)}\`\nPlease contact the app developer.` });

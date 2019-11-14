@@ -2,7 +2,7 @@ const rp = require('request-promise-native');
 const { jsonContentTypeHeader } = require('../lib/constants');
 
 module.exports = async function updateView(context, input) {
-  const { view, viewId } = input;
+  const { throwErr, view, viewId } = input;
 
   const res = await rp({
     body: {
@@ -18,6 +18,10 @@ module.exports = async function updateView(context, input) {
     url: 'https://slack.com/api/views.update',
   });
   if (!res.ok) {
-    throw new Error(JSON.stringify(res));
+    const resMsg = JSON.stringify(res);
+    context.log.error(`Error occurred during view update: ${resMsg}`);
+    if (throwErr) {
+      throw new Error(resMsg);
+    }
   }
 };
