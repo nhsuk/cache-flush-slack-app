@@ -1,7 +1,7 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "{AzureWebJobsStorage}",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=accountKey;EndpointSuffix=core.windows.net",
     "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=accountKey;EndpointSuffix=core.windows.net",
     "CACHE_FLUSH_FUNCTION_APP_FULL_URL_WITH_PATH_AND_CODE": "https://domain.for.app/path/to/function?code=function-key-code",
     "FUNCTIONS_WORKER_RUNTIME": "node",
