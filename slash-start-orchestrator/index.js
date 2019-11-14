@@ -24,9 +24,13 @@ module.exports = df.orchestrator(function* slashStartOrchestrator(context) {
         view = yield context.df.callActivity('verify-user-failed-view', { id, name });
         yield context.df.callActivity('update-view', { view, viewId });
       } else {
-        view = yield context.df.callActivity('verified-req-view', reqBody.text);
-        // TODO: Need to know if this error has happened so a dm can be sent
-        yield context.df.callActivity('update-view', { throwErr: true, view, viewId });
+        try {
+          view = yield context.df.callActivity('verified-req-view', reqBody.text);
+          yield context.df.callActivity('update-view', { throwErr: true, view, viewId });
+        } catch (err) {
+          const { blocks, text } = yield context.df.callActivity('verify-req-view-update-failed', req.body);
+          yield context.df.callActivity('send-msg', { blocks, channel: reqBody.user_id, text });
+        }
       }
     } else {
       yield context.df.callActivity('send-msg', { channel: reqBody.user_id, text: `There has been an error opening the initial view:\n\`${JSON.stringify(res)}\`\nPlease contact the app developer.` });
