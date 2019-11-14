@@ -1,3 +1,9 @@
+0.8.0 / 2019-11-14
+===================
+- Ensure users are checked against list
+- Inform user when view is closed prematurely
+- Suppress view closed errors by default
+
 0.7.1 / 2019-11-13
 ===================
 - App running test checks for an empty response (204) not an OK response (200)

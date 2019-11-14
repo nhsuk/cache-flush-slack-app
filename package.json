@@ -1,6 +1,6 @@
 {
   "name": "cache-flush-slack-app",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "A Slack app to communicate with https://github.com/nhsuk/cache-flush",
   "scripts": {
     "git-hook": "npm run lint && npm run test",
