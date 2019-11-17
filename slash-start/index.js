@@ -2,14 +2,14 @@ const df = require('durable-functions');
 const qs = require('querystring');
 const rp = require('request-promise-native');
 
+const blocksBuilder = require('../lib/blocksBuilder');
 const { jsonContentTypeHeader } = require('../lib/constants');
-const waitingBlocks = require('../lib/waitingBlocks');
 
 const view = require('../views/modal-wrapper-cancel.json');
 
 module.exports = async function slashStartClient(context, req) {
   // Need to return this ASAP, 3 seconds validatity on trigger_id
-  view.blocks = waitingBlocks();
+  view.blocks = blocksBuilder(':information_source: Please do not close this window :information_source:\n\nChecking everything is in order before proceeding.');
   const res = await rp({
     body: {
       trigger_id: qs.decode(req.body).trigger_id,
