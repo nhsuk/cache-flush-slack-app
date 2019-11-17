@@ -5,7 +5,7 @@ const rp = require('request-promise-native');
 const { jsonContentTypeHeader } = require('../lib/constants');
 const waitingBlocks = require('../lib/waitingBlocks');
 
-const view = require('../views/modal-wrapper.json');
+const view = require('../views/modal-wrapper-cancel.json');
 
 module.exports = async function slashStartClient(context, req) {
   // Need to return this ASAP, 3 seconds validatity on trigger_id
