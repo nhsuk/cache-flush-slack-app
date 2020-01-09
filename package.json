@@ -22,7 +22,7 @@
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-nhsuk": "^1.0.0",
-    "husky": "^3.0.8",
+    "husky": "^4.0.2",
     "mocha": "^6.2.1",
     "mocha-junit-reporter": "^1.0.0",
     "nock": "^11.4.0",
