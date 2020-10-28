@@ -27,6 +27,7 @@ module.exports = df.orchestrator(function* cacheFlushOrchestrator(context) {
     const parallelTasks = [];
     parallelTasks.push(context.df.callActivity('update-view', { view: modal, viewId: payload.view.id }));
     parallelTasks.push(context.df.callActivity('send-msg', { blocks, channel: payload.user.id, text }));
+    parallelTasks.push(context.df.callActivity('send-msg', { blocks, channel: process.env.SLACK_CHANNEL_NAME, text: `${text}, performed by ${payload.user.id}` }));
     yield context.df.Task.all(parallelTasks);
   }
 });

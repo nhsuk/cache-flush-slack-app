@@ -35,6 +35,7 @@ jobs:
             targetPath: $(ARTIFACT_PATH)
         - task: ExtractFiles@1
           inputs:
+            archiveFilePatterns: '**/*.zip'
             cleanDestinationFolder: false
         - bash: $(System.DefaultWorkingDirectory)/scripts/get-variables-from-vault.sh
           displayName: 'Get variables from Vault'
