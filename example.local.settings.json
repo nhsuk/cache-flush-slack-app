@@ -6,6 +6,7 @@
     "CACHE_FLUSH_FUNCTION_APP_FULL_URL_WITH_PATH_AND_CODE": "https://domain.for.app/path/to/function?code=function-key-code",
     "FUNCTIONS_WORKER_RUNTIME": "node",
     "SLACK_BOT_USER_OAUTH_ACCESS_TOKEN": "xoxb-xxxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxx",
-    "SLACK_SIGNING_SECRET": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    "SLACK_SIGNING_SECRET": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "SLACK_CHANNEL_NAME": "my_channel"
   }
 }
